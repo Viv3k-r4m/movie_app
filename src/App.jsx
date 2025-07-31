@@ -13,7 +13,7 @@ export default function App() {
       {user ? (
         <>
           <p>Signed in as {user.email}</p>
-          <button onClick={() => signOut(auth)}>Sign Out</button>
+          <button onClick={signOut}>Sign Out</button>
           <MovieList />
           <Favorites />
         </>

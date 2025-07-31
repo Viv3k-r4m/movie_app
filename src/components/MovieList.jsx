@@ -13,11 +13,15 @@ export default function MovieList() {
   const { user } = useAuth();
 
   const addFavorite = async (movieId) => {
+    try {
     const userRef = doc(db, "users", user.uid);
     await updateDoc(userRef, {
       favorites: arrayUnion(movieId)
     });
     alert("Added to favorites!");
+  } catch (err) {
+    console.error("Failed to add favorite:", err);
+  }
   };
 
   return (

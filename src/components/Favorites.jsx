@@ -25,14 +25,17 @@ export default function Favorites() {
   }, [user]);
 
   const removeFavorite = async (movieId) => {
+  try {
     const userRef = doc(db, "users", user.uid);
     await updateDoc(userRef, {
       favorites: arrayRemove(movieId)
     });
-
-    // Optimistically update UI
     setFavorites((prev) => prev.filter((id) => id !== movieId));
-  };
+  } catch (err) {
+    console.error("Failed to remove favorite:", err);
+  }
+};
+
 
   return (
     <div>
