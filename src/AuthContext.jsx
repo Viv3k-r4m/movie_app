@@ -16,6 +16,8 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
+  const signOut = () => firebaseSignOut(auth);
+
   return (
     <AuthContext.Provider value={{ user, signOut }}>
       {!loading && children}

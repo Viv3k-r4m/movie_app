@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
+import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 
 const MOVIES = {
   "1": "Inception",
@@ -12,6 +12,7 @@ const MOVIES = {
 export default function Favorites() {
   const { user } = useAuth();
   const [favorites, setFavorites] = useState([]);
+  if(!user) return null;
 
   useEffect(() => {
     async function fetchData() {
